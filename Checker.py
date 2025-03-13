@@ -1,9 +1,9 @@
 from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
+from increase import Increase
 import re
 import os
-
 
 class Checker():
     def __init__(self, root):
@@ -26,7 +26,8 @@ class Checker():
         self.Button_Frame = Frame(self.root, relief=RAISED)
         self.Button_Frame.pack()
 
-        self.Enter_Button = Button(self.Button_Frame, text="Enter", width=5, height=2, command=self.Check_Password)
+        self.Increase = Increase(self.Progress_Bar)
+        self.Enter_Button = Button(self.Button_Frame, text="Enter", width=5, height=2, command= self.Check_Password)
         self.Enter_Button.pack(pady=10, side=LEFT)
 
         self.Quit_Button = Button(self.Button_Frame, text="Quit", width=5, height=2, command=self.root.quit)
@@ -46,15 +47,15 @@ class Checker():
         if re.match(Password_Regex, Password):
             messagebox.showinfo("Succeed", "Password is strong")
             self.Save_Password(Password)  
-            self.Increase(99)
+            self.Increase.increase(99)
 
         elif re.match(Weak_Regex, Password):
             messagebox.showwarning("Weak", "Password is weak, try again")
-            self.Increase(33)
+            self.Increase.increase(33)
 
         elif re.match(Middle_Regex, Password):
             messagebox.showwarning("Middle", "Password is mid-level, try again")
-            self.Increase(66)
+            self.Increase.increase(66)
 
     def Save_Password(self, Password):
         """
@@ -67,13 +68,6 @@ class Checker():
             file.write(Password)
 
         messagebox.showinfo("Saved", f"Password saved to {File_Path}")
-
-    
-    def Increase(self,Ratio):
-        """
-        Updates the progress bar based on the strength of the password.
-        """
-        self.Progress_Bar.step(Ratio)
 
 if __name__ == "__main__":
     root = Tk()
