@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 from tkinter import ttk
 from increase import Increase
+from saver import Saver
 import re
 import os
 
@@ -33,6 +34,8 @@ class Checker():
         self.Quit_Button = Button(self.Button_Frame, text="Quit", width=5, height=2, command=self.root.quit)
         self.Quit_Button.pack(side=RIGHT)
 
+        self.saver = Saver()
+
     def Check_Password(self):
         """
         Validates the entered password against three regex patterns 
@@ -46,7 +49,7 @@ class Checker():
 
         if re.match(Password_Regex, Password):
             messagebox.showinfo("Succeed", "Password is strong")
-            self.Save_Password(Password)  
+            self.saver.Save_Password(Password)  
             self.Increase.increase(99)
 
         elif re.match(Weak_Regex, Password):
@@ -56,18 +59,6 @@ class Checker():
         elif re.match(Middle_Regex, Password):
             messagebox.showwarning("Middle", "Password is mid-level, try again")
             self.Increase.increase(66)
-
-    def Save_Password(self, Password):
-        """
-        Saves the valid password into a file named Passwords.txt in the current directory.
-        """
-        Password = str(Password)
-        Path = os.getcwd()  
-        File_Path = os.path.join(Path, "Passwords.txt")  
-        with open(File_Path, "w") as file:  
-            file.write(Password)
-
-        messagebox.showinfo("Saved", f"Password saved to {File_Path}")
 
 if __name__ == "__main__":
     root = Tk()
