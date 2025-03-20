@@ -39,26 +39,6 @@ class Checker():
         self.Quit_Button = Button(self.Button_Frame, text="Quit", width=5, height=2, command=self.root.quit)
         self.Quit_Button.pack(side=RIGHT)
 
-    """
-    def Check_Password(self):
-        Password_Regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,16}$'
-        Weak_Regex = r'^(?=.*[a-z])(?=.*[A-Z])[A-Za-z]{6,}'
-        Middle_Regex = r'^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{8,}$'
-        Password = self.Password_Text.get()
-
-        if re.match(Password_Regex, Password):
-            messagebox.showinfo("Succeed", "Password is strong")
-            self.saver.Save_Password(Password)  
-            self.Increase.increase(99)
-
-        elif re.match(Weak_Regex, Password):
-            messagebox.showwarning("Weak", "Password is weak, try again")
-            self.Increase.increase(33)
-
-        elif re.match(Middle_Regex, Password):
-            messagebox.showwarning("Middle", "Password is mid-level, try again")
-            self.Increase.increase(66)
-    """
 if __name__ == "__main__":
     root = Tk()
     Checker(root)
